@@ -1,0 +1,10 @@
+<!-- app/views/categories/_form.html.erb -->
+
+<%= form_with model: category, url: path, data: { turbo: false } do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <div>
+    <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
+  </div>
+  <%= form.submit %>
+<% end %>
