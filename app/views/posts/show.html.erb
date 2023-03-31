@@ -1,0 +1,9 @@
+<!-- app/views/posts/show.html.erb -->
+
+<h1>show post id: <%= @post.id %></h1>
+<ul>
+  <li><%= @post.title %></li>
+  <li><%= @post.content %></li>
+</ul>
+
+<%= link_to 'Index', posts_path %>

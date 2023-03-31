@@ -1,0 +1,24 @@
+<h1>Post List</h1>
+
+<table>
+  <thead>
+  <td>title</td>
+  <td>content</td>
+  <td>address</td>
+  </thead>
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.content %></td>
+      <td><%= post.address %></td>
+      <td>
+        <%= link_to 'Show', post_path(post) %>
+        <%= link_to 'Edit', edit_post_path(post) %>
+        <%= button_to 'Delete', post_path(post), method: :delete %>
+        <%= link_to 'Comments', post_comments_path(post) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'New', new_post_path %>
