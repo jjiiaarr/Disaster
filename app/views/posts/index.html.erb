@@ -5,6 +5,7 @@
   <td>Title</td>
   <td>Content</td>
   <td>Type of Disaster</td>
+  <td>image</td>
   <td>Address</td>
   <td>Comments Count</td>
   </thead>
@@ -14,8 +15,8 @@
       <td><%= post.content %></td>
       <td><%= post.categories.pluck(:name).join(',') %></td>
       <td><%= post.address %></td>
-      <td><%= post.user&.email %></td>
       <td><%= post.comments_count %></td>
+      <td><%= image_tag post.image.url(resize_to_limit: [1, 1]) if post.image.present? %></td>
       <td>
         <%= link_to 'Show', post_path(post) %>
         <%= link_to 'Edit', edit_post_path(post) if user_signed_in? && post.user == current_user %>
