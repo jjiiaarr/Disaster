@@ -34,8 +34,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    redirect_to posts_path
+    @post = Post.find(params[:id])
+    if @post.comments.any?
+      flash[:notice] = "Post has already comments. It can't be deleted."
+      redirect_to posts_path
+    else
+      @post.destroy
+      flash[:notice] = "Post is successfully deleted."
+      redirect_to posts_path
+    end
   end
 
   private
@@ -52,6 +59,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :address, :image , category_ids: [])
+    params.require(:post).permit(:title, :content, :address, :image, category_ids: [])
   end
 end
