@@ -49,6 +49,8 @@ gem 'devise'
 
 gem 'carrierwave'
 
+gem 'pundit'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
