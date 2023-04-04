@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :validate_post_owner, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.includes(:categories, :user).all
@@ -23,9 +22,13 @@ class PostsController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    authorize @post, :edit?, policy_class: PostPolicy
+  end
 
   def update
+    authorize @post, :update?, policy_class: PostPolicy
+
     if @post.update(post_params)
       redirect_to posts_path
     else
@@ -34,6 +37,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    authorize @post, :destroy?, policy_class: PostPolicy
+
     @post = Post.find(params[:id])
     if @post.comments.any?
       flash[:notice] = "Post has already comments. It can't be deleted."
@@ -46,13 +51,6 @@ class PostsController < ApplicationController
   end
 
   private
-
-  def validate_post_owner
-    unless @post.user == current_user
-      flash[:notice] = 'the post not belongs to you'
-      redirect_to posts_path
-    end
-  end
 
   def set_post
     @post = Post.find(params[:id])
