@@ -1,16 +1,24 @@
 <h1>Disaster Information in Makati</h1>
 
+  <h3> Hot Posts</h3>
+  <% @hot.each do |post| %>
+    <div class="post">
+      <%= post.title %>
+    </div>
+  <% end %>
+
 <table>
   <thead>
+
   <td>Title</td>
   <td>Content</td>
   <td>Type of Disaster</td>
-  <td>image</td>
+  <td>Image</td>
   <td>Address</td>
   <td>Comments Count</td>
   </thead>
   <% @posts.each do |post| %>
-    <tr class="container">
+    <tr>
       <td><%= post.title %></td>
       <td><%= post.content %></td>
       <td><%= post.categories.pluck(:name).join(',') %></td>
