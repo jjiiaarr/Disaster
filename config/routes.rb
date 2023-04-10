@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'welcome' => 'welcome#index'
   root 'posts#index'
-  get 'users/:id', to: 'users#index', as: 'user'
+  get 'users/:id', to: 'users#index'
 
   resources :posts do
     resources :comments, except: :show
