@@ -7,6 +7,7 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag 'style' %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
 
@@ -14,6 +15,7 @@
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <% if user_signed_in? %>
+  <h4>Welcome <%= current_user.email %></h4>
   <%= link_to 'Sign out', destroy_user_session_path, data: { 'turbo-method': :delete } %>
 <% else %>
   <%= link_to 'Sign in', new_user_session_path %>
