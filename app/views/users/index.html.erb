@@ -1,0 +1,15 @@
+<h1>Welcome <%= current_user.email %></h1>
+
+<h2>Posts</h2>
+<ul>
+  <% @posts.each do |post| %>
+    <li><%= post.title %></li>
+  <% end %>
+</ul>
+
+<h2>Comments</h2>
+<ul>
+  <% @comments.each do |comment| %>
+    <li><%= comment.body %></li>
+  <% end %>
+</ul>
