@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   get 'users/index'
   devise_for :users
 
-  get 'welcome' => 'welcome#index'
-  root 'posts#index'
+  #get 'welcome' => 'welcome#index'
+  #root 'posts#index'
+  root 'welcome#index'
   get 'users/:id', to: 'users#index'
 
   resources :posts do
