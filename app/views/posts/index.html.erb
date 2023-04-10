@@ -1,12 +1,13 @@
 <h1>Disaster Information in Makati</h1>
 
-  <h3> Hot Posts</h3>
+  <h3> Hot Posts &#128293</h3>
   <% @hot.each do |post| %>
     <div class="post">
       <%= post.title %>
     </div>
   <% end %>
 
+<div class="card">
 <table>
   <thead>
 
@@ -36,5 +37,11 @@
   <% end %>
 </table>
 
+</div>
+
 <%= link_to 'New', new_post_path %>
-<%= link_to 'My Own Posts', users_index_path(current_user)%>
+<% if current_user %>
+  <%= link_to 'My Own Posts', users_index_path(current_user) %>
+<% else %>
+  <%= link_to 'My Own Posts', new_user_session_path %>
+<% end %>
