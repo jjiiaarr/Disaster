@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_category, only: [:edit, :update, :destroy]
 
   def index
@@ -41,5 +42,11 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name)
+  end
+
+  def require_admin
+    unless current_user.admin?
+      redirect_to root_path, alert: "You must be an admin to access this page."
+    end
   end
 end
