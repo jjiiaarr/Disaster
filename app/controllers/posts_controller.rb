@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :set_post, only: [:show,:edit, :update, :destroy]
 
   def index
     @hot = Post.all.order(comments_count: :desc).limit(3)
