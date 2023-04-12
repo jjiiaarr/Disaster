@@ -51,6 +51,8 @@ gem 'carrierwave'
 
 gem 'pundit'
 
+gem 'geocoder'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
