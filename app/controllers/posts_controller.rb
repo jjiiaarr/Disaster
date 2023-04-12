@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_post, only: [:show,:edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @hot = Post.all.order(comments_count: :desc).limit(3)
@@ -14,6 +14,17 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
+
+    if Rails.env.development?
+      @post.ip_address = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+    else
+      @post.ip_address = request.remote_ip
+    end
+
+    @post.country = Geocoder.search(ip_address).first&.country
+    @post.country_code = Geocoder.search(ip_address).first.country_code
+    @post.provider = Geocoder.search(ip_address).first.data['org']
+
     if @post.save
       redirect_to posts_path
     else

@@ -17,6 +17,9 @@
   <td>Image</td>
   <td>Address</td>
   <td>Comments Count</td>
+  <td>Country Code</td>
+  <td>Country</td>
+  <td>ISP</td>
   </thead>
   <% @posts.each do |post| %>
     <tr>
@@ -26,6 +29,9 @@
       <td><%= image_tag post.image.url if post.image.present? %></td>
       <td><%= post.address %></td>
       <td><%= post.comments_count %></td>
+      <td><%= Geocoder.search(post.country_code).first&.country %></td>
+      <td><%= Geocoder.search(post.country).first&.country %></td>
+      <td><%= Geocoder.search(post.provider).first&.country %></td>
       <td>
         <%= link_to 'Show', post_path(post) %>
         <%= link_to 'Edit', edit_post_path(post) if policy(post).edit? %>
