@@ -53,6 +53,8 @@ gem 'pundit'
 
 gem 'geocoder'
 
+gem 'friendly_id'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
