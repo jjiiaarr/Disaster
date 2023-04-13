@@ -31,7 +31,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @post = Post.friendly.find(params[:id])
+  end
 
   def edit
     authorize @post, :edit?, policy_class: PostPolicy
@@ -50,7 +52,7 @@ class PostsController < ApplicationController
   def destroy
     authorize @post, :destroy?, policy_class: PostPolicy
 
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
     if @post.comments.any?
       flash[:notice] = "Post has already comments. It can't be deleted."
       redirect_to posts_path
@@ -64,7 +66,7 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
   end
 
   def post_params
