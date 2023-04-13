@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_12_142224) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_13_031358) do
   create_table "categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_142224) do
     t.string "ip_address"
     t.string "country_code"
     t.string "country"
-    t.string "ISP"
+    t.string "provider"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
