@@ -21,9 +21,8 @@ class PostsController < ApplicationController
       @post.ip_address = request.remote_ip
     end
 
-    @post.country = Geocoder.search(ip_address).first&.country
-    @post.country_code = Geocoder.search(ip_address).first.country_code
-    @post.provider = Geocoder.search(ip_address).first.data['org']
+    @post.country = Geocoder.search(@post.ip_address).first&.country
+    @post.provider = Geocoder.search(@post.ip_address).first&.data['org']
 
     if @post.save
       redirect_to posts_path
