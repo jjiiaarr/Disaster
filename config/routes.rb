@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   devise_for :users
 
   #get 'welcome' => 'welcome#index'
-  #root 'posts#index'
   root 'welcome#index'
-  get 'users/:id', to: 'users#index'
 
   resources :posts do
     resources :comments, except: :show
   end
   resources :categories, except: :show
+
+  get 'users/:id', to: 'users#index'
+  get '/:slug', to: 'posts#show'
 end
